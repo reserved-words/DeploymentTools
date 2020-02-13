@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace DeploymentTools
 {
-    public static class Database
+    internal static class Database
     {
         public static void Migrate(string connectionString, string schemaName)
         {

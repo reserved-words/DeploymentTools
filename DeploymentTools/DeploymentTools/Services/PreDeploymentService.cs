@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
 
 namespace DeploymentTools
 {
@@ -17,17 +14,17 @@ namespace DeploymentTools
 
         public void CreateService(string password)
         {
-            RunPowershell("ServiceSetUp", "-DomainName", _domainName, "-AppName", AppName, "-UserName", TaskUserName, "-Password", password);
+            RunPowershell("ServiceSetUp", _domainName, AppName, TaskUserName, password);
         }
 
         public void CreateApi()
         {
-            RunPowershell("WebAppSetUp", "-DomainName", _domainName, "-AppName", ApiName);
+            RunPowershell("WebAppSetUp", _domainName, ApiName);
         }
 
         public void CreateWebApp()
         {
-            RunPowershell("WebAppSetUp", "-DomainName", _domainName, "-AppName", AppName);
+            RunPowershell("WebAppSetUp", _domainName, AppName);
         }
 
         private void RunPowershell(string script, params string[] parameters)
