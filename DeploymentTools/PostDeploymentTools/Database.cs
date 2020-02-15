@@ -74,7 +74,7 @@ namespace PostDeploymentTools
                     new SqlParameter("@UserName", userName)
                 };
 
-                using (var command = new SqlCommand(SqlScripts.CreateUser, connection))
+                using (var command = new SqlCommand(SqlScripts.GrantObjectPermission, connection))
                 {
                     command.Parameters.AddRange(parameters.ToArray());
                     command.ExecuteNonQuery();
