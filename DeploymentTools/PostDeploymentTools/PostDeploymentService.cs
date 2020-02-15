@@ -73,13 +73,20 @@ namespace PostDeploymentTools
 
         private void GrantPermission(string userName, string permission, string objectName = null)
         {
-            if (objectName == null)
+            try
             {
-                Database.GrantSchemaPermission(_connectionString, permission, _schemaName, userName);
+                if (objectName == null)
+                {
+                    Database.GrantSchemaPermission(_connectionString, permission, _schemaName, userName);
+                }
+                else
+                {
+                    Database.GrantObjectPermission(_connectionString, permission, _schemaName, objectName, userName);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Database.GrantObjectPermission(_connectionString, permission, _schemaName, objectName, userName);
+                Log(ex);
             }
         }
     }
