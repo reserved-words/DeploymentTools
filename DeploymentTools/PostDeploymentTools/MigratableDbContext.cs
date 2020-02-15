@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DeploymentTools
+namespace PostDeploymentTools
 {
     public class MigratableDbContext : DbContext
     {

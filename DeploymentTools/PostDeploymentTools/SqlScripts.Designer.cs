@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeploymentTools {
+namespace PostDeploymentTools {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DeploymentTools {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DeploymentTools.SqlScripts", typeof(SqlScripts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PostDeploymentTools.SqlScripts", typeof(SqlScripts).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

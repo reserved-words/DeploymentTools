@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace DeploymentTools
+namespace PreDeploymentTools
 {
     internal static class Powershell
     {

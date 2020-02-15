@@ -1,6 +1,7 @@
-﻿using System;
+﻿using DeploymentTools;
+using System;
 
-namespace DeploymentTools
+namespace PreDeploymentTools
 {
     public class PreDeploymentService : DeploymentService
     {

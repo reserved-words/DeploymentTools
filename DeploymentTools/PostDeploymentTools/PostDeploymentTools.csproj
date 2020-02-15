@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeploymentTools\DeploymentTools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SqlScripts.Designer.cs">
+      <DependentUpon>SqlScripts.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="SqlScripts.resx">
+      <LastGenOutput>SqlScripts.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SqlScripts\CreateUser.sql">
+      <SubType>Component</SubType>
+    </None>
+    <None Update="SqlScripts\GrantObjectPermission.sql">
+      <SubType>Component</SubType>
+    </None>
+    <None Update="SqlScripts\GrantSchemaPermission.sql">
+      <SubType>Component</SubType>
+    </None>
+  </ItemGroup>
+
+</Project>

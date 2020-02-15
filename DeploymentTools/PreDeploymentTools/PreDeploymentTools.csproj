@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="PowershellScripts\IIS-AppSetUp.ps1" />
+    <None Remove="PowershellScripts\ServiceSetUp.ps1" />
+    <None Remove="PowershellScripts\SetupTools.psm1" />
+    <None Remove="PowershellScripts\Test.ps1" />
+    <None Remove="PowershellScripts\UserRights.psm1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="PowershellScripts\IIS-AppSetUp.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PowershellScripts\ServiceSetUp.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PowershellScripts\SetupTools.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PowershellScripts\Test.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PowershellScripts\UserRights.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeploymentTools\DeploymentTools.csproj" />
+  </ItemGroup>
+
+</Project>

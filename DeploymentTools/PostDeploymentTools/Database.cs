@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace DeploymentTools
+namespace PostDeploymentTools
 {
     internal static class Database
     {
