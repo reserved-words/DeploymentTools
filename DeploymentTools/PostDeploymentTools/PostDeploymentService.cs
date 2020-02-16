@@ -17,11 +17,11 @@ namespace PostDeploymentTools
             _schemaName = schemaName;
         }
 
-        public void UpdateDatabase()
+        public void UpdateDatabase(Func<MigratableDbContext> dbContextFactory)
         {
             try
             {
-                Database.Migrate(_connectionString, _schemaName);
+                Database.Migrate(dbContextFactory);
             }
             catch (Exception ex)
             {

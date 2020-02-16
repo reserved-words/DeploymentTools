@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -6,9 +7,9 @@ namespace PostDeploymentTools
 {
     internal static class Database
     {
-        public static void Migrate(string connectionString, string schemaName)
+        public static void Migrate(Func<MigratableDbContext> dbContextFactory)
         {
-            using (var dbContext = new MigratableDbContext(connectionString, schemaName))
+            using (var dbContext = dbContextFactory())
             {
                 dbContext.Database.Migrate();
             }
