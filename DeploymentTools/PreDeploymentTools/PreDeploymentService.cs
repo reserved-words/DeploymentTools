@@ -1,21 +1,21 @@
-﻿using DeploymentTools;
-using System;
+﻿using System;
 
 namespace PreDeploymentTools
 {
-    public class PreDeploymentService : DeploymentService
+    public class PreDeploymentService
     {
+        private readonly string _appName;
         private readonly string _domainName;
 
         public PreDeploymentService(string appName, string domainName)
-            :base(appName)
         {
+            _appName = appName;
             _domainName = domainName;
         }
 
         public void CreateService(string password)
         {
-            RunPowershell("ServiceSetUp", _domainName, AppName, TaskUserName, password);
+            RunPowershell("ServiceSetUp", _domainName, _appName, TaskUserName, password);
         }
 
         public void CreateApi()
@@ -25,7 +25,7 @@ namespace PreDeploymentTools
 
         public void CreateWebApp()
         {
-            RunPowershell("WebAppSetUp", _domainName, AppName);
+            RunPowershell("WebAppSetUp", _domainName, _appName);
         }
 
         private void RunPowershell(string script, params string[] parameters)
@@ -36,8 +36,12 @@ namespace PreDeploymentTools
             }
             catch (Exception ex)
             {
-                Log(ex);
+                // TO DO
+                // Log(ex);
             }
         }
+
+        private string ApiName => $"{_appName}Api";
+        private string TaskUserName => $"{_appName}TaskUser";
     }
 }

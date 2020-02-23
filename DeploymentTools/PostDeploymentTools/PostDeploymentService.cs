@@ -1,17 +1,19 @@
-﻿using DeploymentTools;
-using System;
+﻿using System;
+using System.IO;
+using System.Text;
 
 namespace PostDeploymentTools
 {
-    public class PostDeploymentService : DeploymentService
+    public class PostDeploymentService
     {
+        private readonly string _appName;
         private readonly string _connectionString;
         private readonly string _databaseName;
         private readonly string _schemaName;
 
         public PostDeploymentService(string appName, string connectionString, string databaseName, string schemaName)
-            : base(appName)
         {
+            _appName = appName;
             _connectionString = connectionString;
             _databaseName = databaseName;
             _schemaName = schemaName;
@@ -25,7 +27,8 @@ namespace PostDeploymentTools
             }
             catch (Exception ex)
             {
-                Log(ex);
+                // TO DO
+                // Log(ex);
             }
         }
 
@@ -67,7 +70,8 @@ namespace PostDeploymentTools
             }
             catch (Exception ex)
             {
-                Log(ex);
+                // TO DO
+                // Log(ex);
             }
         }
 
@@ -86,8 +90,14 @@ namespace PostDeploymentTools
             }
             catch (Exception ex)
             {
-                Log(ex);
+                // TO DO
+                // Log(ex);
             }
         }
+
+        private string ApiName => $"{_appName}Api";
+        private string AppUserName => $@"IIS APPPOOL\{_appName}";
+        private string ApiUserName => $@"IIS APPPOOL\{ApiName}";
+        private string TaskUserName => $"{_appName}TaskUser";
     }
 }
