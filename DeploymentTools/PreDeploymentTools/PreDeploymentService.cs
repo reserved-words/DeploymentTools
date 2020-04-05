@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace PreDeploymentTools
 {
@@ -6,12 +7,12 @@ namespace PreDeploymentTools
     {
         private readonly string _appName;
         private readonly string _domainName;
-        private readonly string _logDirectory;
+        private readonly string _logFile;
         private readonly Action<Exception> _handleError;
 
-        public PreDeploymentService(string appName, string domainName, string logDirectory, Action<Exception> handleError = null)
+        public PreDeploymentService(string appName, string domainName, string logFile, Action<Exception> handleError = null)
         {
-            _logDirectory = logDirectory;
+            _logFile = logFile;
             _handleError = handleError;
             _appName = appName;
             _domainName = domainName;
@@ -19,24 +20,32 @@ namespace PreDeploymentTools
 
         public void CreateService(string password)
         {
-            RunPowershell("ServiceSetUp", _domainName, _appName, TaskUserName, password, _logDirectory);
+            Log("Creating service");
+            RunPowershell("ServiceSetUp", _domainName, _appName, TaskUserName, password, _logFile);
+            Log("Service created");
         }
 
         public void CreateApi()
         {
+            Log("Creating API");
             RunPowershell("WebAppSetUp", _domainName, ApiName);
+            Log("API created");
         }
 
         public void CreateWebApp()
         {
+            Log("Creating web app");
             RunPowershell("WebAppSetUp", _domainName, _appName);
+            Log("Web app created");
         }
 
         private void RunPowershell(string script, params string[] parameters)
         {
             try
             {
+                Log($"Running script {script}");
                 Powershell.RunScript(script, parameters);
+                Log($"Finished running script {script}");
             }
             catch (Exception ex)
             {
@@ -64,6 +73,11 @@ namespace PreDeploymentTools
             {
                 return false;
             }
+        }
+
+        private void Log(string message)
+        {
+            File.AppendText($"{DateTime.Now.ToShortTimeString()} {message}");
         }
     }
 }

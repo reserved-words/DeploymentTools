@@ -1,30 +1,28 @@
-param($DomainName, $AppName, $UserName, $Password, $LogDirectory)
-
-$logfile =  $LogDirectory + "\$(get-date -format `"yyyy-MM-dd`").log";
+param($DomainName, $AppName, $UserName, $Password, $LogFile)
 
 try
 {
-	"Importing SetupTools" | out-file -Filepath $logfile -append
+	"Importing SetupTools" | out-file -Filepath $LogFile -append
 	Import-Module $PSScriptRoot\SetupTools.psm1
 
 	$ServiceUsersGroupName = "TaskAccounts"
 
-	"Adding TaskAccounts group" | out-file -Filepath $logfile -append
+	"Adding TaskAccounts group" | out-file -Filepath $LogFile -append
 	$ServiceUsers = Add-Group -GroupName $ServiceUsersGroupName
 
-	"Granting SeBatchLogonRight" | out-file -Filepath $logfile -append
+	"Granting SeBatchLogonRight" | out-file -Filepath $LogFile -append
 	Grant-Right -Domain $DomainName -GroupName $ServiceUsersGroupName -Right "SeBatchLogonRight"
 
-	"Creating Services directory" | out-file -Filepath $logfile -append
+	"Creating Services directory" | out-file -Filepath $LogFile -append
 	Create-Directory -Path "C:\" -Name "Services"
 
-	"Creating application directory" | out-file -Filepath $logfile -append
+	"Creating application directory" | out-file -Filepath $LogFile -append
 	Create-Directory -Path "C:\Services" -Name $AppName
 
-	"Creating task user" | out-file -Filepath $logfile -append
+	"Creating task user" | out-file -Filepath $LogFile -append
 	New-TaskUser -UserName $UserName -Password $Password -AppFolderName $AppName
 }
 catch
 {
-	$_.Exception.Message | out-file -Filepath $logfile -append
+	$_.Exception.Message | out-file -Filepath $LogFile -append
 }
