@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>1.2.3</Version>
+    <Version>1.2.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="PowershellScripts\IIS-AppSetUp.ps1" />
     <None Remove="PowershellScripts\ServiceSetUp.ps1" />
     <None Remove="PowershellScripts\SetupTools.psm1" />
-    <None Remove="PowershellScripts\Test.ps1" />
     <None Remove="PowershellScripts\UserRights.psm1" />
   </ItemGroup>
 
@@ -21,9 +20,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="PowershellScripts\SetupTools.psm1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PowershellScripts\Test.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="PowershellScripts\UserRights.psm1">

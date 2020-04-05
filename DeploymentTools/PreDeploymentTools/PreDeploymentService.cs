@@ -28,14 +28,14 @@ namespace PreDeploymentTools
         public void CreateApi()
         {
             Log("Creating API");
-            RunPowershell("WebAppSetUp", _domainName, ApiName);
+            RunPowershell("IIS-AppSetUp", _domainName, ApiName);
             Log("API created");
         }
 
         public void CreateWebApp()
         {
             Log("Creating web app");
-            RunPowershell("WebAppSetUp", _domainName, _appName);
+            RunPowershell("IIS-AppSetUp", _domainName, _appName);
             Log("Web app created");
         }
 

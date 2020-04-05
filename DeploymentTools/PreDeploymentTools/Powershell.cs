@@ -10,7 +10,7 @@ namespace PreDeploymentTools
         {
             Log(logFile, "Starting run script method");
             var paramString = string.Join(" ", parameters);
-            var commandString = string.Format("-File \"{0}\" {1}", scriptPath, paramString);
+            var commandString = string.Format("-File \"{0}\" {1}", $"{scriptPath}.ps1", paramString);
 
             Log(logFile, $"Command string: {commandString}");
             Process.Start("powershell.exe", commandString);
