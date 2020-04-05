@@ -44,7 +44,7 @@ namespace PreDeploymentTools
             try
             {
                 Log($"Running script {script}");
-                Powershell.RunScript(script, parameters);
+                Powershell.RunScript(_logFile, script, parameters);
                 Log($"Finished running script {script}");
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace PreDeploymentTools
 
         private void Log(string message)
         {
-            File.AppendAllText(_logFile, $"{DateTime.Now.ToShortTimeString()} {message}");
+            File.AppendAllText(_logFile, $"{DateTime.Now.ToShortTimeString()} {message}{Environment.NewLine}");
         }
     }
 }
