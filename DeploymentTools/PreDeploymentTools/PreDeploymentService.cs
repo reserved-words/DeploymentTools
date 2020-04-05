@@ -38,19 +38,30 @@ namespace PreDeploymentTools
             }
             catch (Exception ex)
             {
-                HandleError(ex);
+                if (!HandleError(ex))
+                {
+                    throw;
+                }
             }
         }
 
         private string ApiName => $"{_appName}Api";
         private string TaskUserName => $"{_appName}TaskUser";
 
-        private void HandleError(Exception ex)
+        private bool HandleError(Exception ex)
         {
             if (_handleError == null)
-                return;
+                return false;
 
-            _handleError(ex);
+            try
+            {
+                _handleError(ex);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

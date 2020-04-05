@@ -27,7 +27,10 @@ namespace PostDeploymentTools
             }
             catch (Exception ex)
             {
-                HandleError(ex);
+                if (!HandleError(ex))
+                {
+                    throw;
+                }
             }
         }
 
@@ -69,7 +72,10 @@ namespace PostDeploymentTools
             }
             catch (Exception ex)
             {
-                HandleError(ex);
+                if (!HandleError(ex))
+                {
+                    throw;
+                }
             }
         }
 
@@ -88,7 +94,10 @@ namespace PostDeploymentTools
             }
             catch (Exception ex)
             {
-                HandleError(ex);
+                if (!HandleError(ex))
+                {
+                    throw;
+                }
             }
         }
 
@@ -97,12 +106,20 @@ namespace PostDeploymentTools
         private string ApiUserName => $@"IIS APPPOOL\{ApiName}";
         private string TaskUserName => $"{_appName}TaskUser";
 
-        private void HandleError(Exception ex)
+        private bool HandleError(Exception ex)
         {
             if (_handleError == null)
-                return;
+                return false;
 
-            _handleError(ex);
+            try
+            {
+                _handleError(ex);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
