@@ -6,10 +6,12 @@ namespace PreDeploymentTools
     {
         private readonly string _appName;
         private readonly string _domainName;
+        private readonly string _logDirectory;
         private readonly Action<Exception> _handleError;
 
-        public PreDeploymentService(string appName, string domainName, Action<Exception> handleError = null)
+        public PreDeploymentService(string appName, string domainName, string logDirectory, Action<Exception> handleError = null)
         {
+            _logDirectory = logDirectory;
             _handleError = handleError;
             _appName = appName;
             _domainName = domainName;
@@ -17,7 +19,7 @@ namespace PreDeploymentTools
 
         public void CreateService(string password)
         {
-            RunPowershell("ServiceSetUp", _domainName, _appName, $"{_domainName}\\{TaskUserName}", password);
+            RunPowershell("ServiceSetUp", _domainName, _appName, TaskUserName, password, _logDirectory);
         }
 
         public void CreateApi()
