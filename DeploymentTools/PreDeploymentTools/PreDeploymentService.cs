@@ -17,7 +17,7 @@ namespace PreDeploymentTools
 
         public void CreateService(string password)
         {
-            RunPowershell("ServiceSetUp", _domainName, _appName, TaskUserName, password);
+            RunPowershell("ServiceSetUp", _domainName, _appName, $"{_domainName}\\{TaskUserName}", password);
         }
 
         public void CreateApi()
