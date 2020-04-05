@@ -104,7 +104,7 @@ namespace PostDeploymentTools
         private string ApiName => $"{_appName}Api";
         private string AppUserName => $@"IIS APPPOOL\{_appName}";
         private string ApiUserName => $@"IIS APPPOOL\{ApiName}";
-        private string TaskUserName => $"{_appName}TaskUser";
+        private string TaskUserName => $"{_appName}User";
 
         private bool HandleError(Exception ex)
         {

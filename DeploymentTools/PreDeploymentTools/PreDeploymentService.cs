@@ -57,7 +57,7 @@ namespace PreDeploymentTools
         }
 
         private string ApiName => $"{_appName}Api";
-        private string TaskUserName => $"{_appName}TaskUser";
+        private string TaskUserName => $"{_appName}User";
 
         private bool HandleError(Exception ex)
         {
