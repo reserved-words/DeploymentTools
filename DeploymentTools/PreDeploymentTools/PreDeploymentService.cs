@@ -77,7 +77,7 @@ namespace PreDeploymentTools
 
         private void Log(string message)
         {
-            File.AppendText($"{DateTime.Now.ToShortTimeString()} {message}");
+            File.AppendAllText(_logFile, $"{DateTime.Now.ToShortTimeString()} {message}");
         }
     }
 }
