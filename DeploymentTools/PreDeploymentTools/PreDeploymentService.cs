@@ -6,9 +6,11 @@ namespace PreDeploymentTools
     {
         private readonly string _appName;
         private readonly string _domainName;
+        private readonly Action<Exception> _handleError;
 
-        public PreDeploymentService(string appName, string domainName)
+        public PreDeploymentService(string appName, string domainName, Action<Exception> handleError = null)
         {
+            _handleError = handleError;
             _appName = appName;
             _domainName = domainName;
         }
@@ -36,12 +38,19 @@ namespace PreDeploymentTools
             }
             catch (Exception ex)
             {
-                // TO DO
-                // Log(ex);
+                HandleError(ex);
             }
         }
 
         private string ApiName => $"{_appName}Api";
         private string TaskUserName => $"{_appName}TaskUser";
+
+        private void HandleError(Exception ex)
+        {
+            if (_handleError == null)
+                return;
+
+            _handleError(ex);
+        }
     }
 }
