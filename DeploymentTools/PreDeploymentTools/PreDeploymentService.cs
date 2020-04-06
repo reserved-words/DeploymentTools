@@ -20,8 +20,10 @@ namespace PreDeploymentTools
 
         public void CreateService(string password)
         {
+            var powershellLogging = _logFile.Replace(".log", "-ps.log");
+
             Log("Creating service");
-            RunPowershell("ServiceSetUp", _domainName, _appName, TaskUserName, password, _logFile);
+            RunPowershell("ServiceSetUp", _domainName, _appName, TaskUserName, password, powershellLogging);
             Log("Service created");
         }
 
