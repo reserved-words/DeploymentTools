@@ -8,15 +8,24 @@ namespace PostDeploymentTools
         private readonly string _connectionString;
         private readonly string _databaseName;
         private readonly string _schemaName;
+        private readonly string _domainName;
+
         private readonly Action<Exception> _handleError;
 
-        public PostDeploymentService(string appName, string connectionString, string databaseName, string schemaName, Action<Exception> handleError = null)
+        public PostDeploymentService(
+            string domainName,
+            string appName, 
+            string connectionString, 
+            string databaseName, 
+            string schemaName, 
+            Action<Exception> handleError = null)
         {
             _appName = appName;
             _connectionString = connectionString;
             _databaseName = databaseName;
             _schemaName = schemaName;
             _handleError = handleError;
+            _domainName = domainName;
         }
 
         public void UpdateDatabase(Func<MigratableDbContext> dbContextFactory)
@@ -104,7 +113,7 @@ namespace PostDeploymentTools
         private string ApiName => $"{_appName}Api";
         private string AppUserName => $@"IIS APPPOOL\{_appName}";
         private string ApiUserName => $@"IIS APPPOOL\{ApiName}";
-        private string TaskUserName => $"{_appName}User";
+        private string TaskUserName => $@"{_domainName}\{_appName}User";
 
         private bool HandleError(Exception ex)
         {
