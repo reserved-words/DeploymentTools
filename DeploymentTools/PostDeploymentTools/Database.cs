@@ -38,6 +38,30 @@ namespace PostDeploymentTools
             }
         }
 
+        public static void CreateSqlUser(string connectionString, string databaseName, string schemaName, string userName, string password)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                var parameters = new List<SqlParameter>
+                {
+                    new SqlParameter("@DatabaseName", databaseName),
+                    new SqlParameter("@SchemaName", schemaName),
+                    new SqlParameter("@UserName", userName),
+                    new SqlParameter("@Password", password)
+                };
+
+                using (var command = new SqlCommand(SqlScripts.CreateSqlUser, connection))
+                {
+                    command.Parameters.AddRange(parameters.ToArray());
+                    command.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+        }
+
         public static void GrantSchemaPermission(string connectionString, string permission, string schemaName, string userName)
         {
             using (var connection = new SqlConnection(connectionString))

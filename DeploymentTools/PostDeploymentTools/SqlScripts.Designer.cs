@@ -66,6 +66,26 @@ namespace PostDeploymentTools {
         ///
         ///    IF NOT EXISTS (SELECT [LoginName] FROM SYSLOGINS WHERE [Name] = @UserName)
         ///    BEGIN
+        ///        SET @SqlStatement = &apos;CREATE LOGIN [&apos; + @UserName + &apos;] WITH PASSWORD = &apos; + @Password + &apos;, DEFAULT_DATABASE=[&apos; + @DatabaseName + &apos;], DEFAULT_LANGUAGE=[us_english]&apos;
+        ///        EXEC sp_executesql @SqlStatement
+        ///    END
+        ///
+        ///    IF NOT EXISTS (SELECT [Name] FROM SYSUSERS WHERE [Name] = @UserName)
+        ///    BEGIN
+        ///        SET @SqlStatement = &apos;CREATE USER [&apos; + @UserName + &apos;] F [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CreateSqlUser {
+            get {
+                return ResourceManager.GetString("CreateSqlUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BEGIN
+        ///    DECLARE @SqlStatement NVARCHAR(500)
+        ///
+        ///    IF NOT EXISTS (SELECT [LoginName] FROM SYSLOGINS WHERE [Name] = @UserName)
+        ///    BEGIN
         ///        SET @SqlStatement = &apos;CREATE LOGIN [&apos; + @UserName + &apos;] FROM WINDOWS WITH DEFAULT_DATABASE=[&apos; + @DatabaseName + &apos;], DEFAULT_LANGUAGE=[us_english]&apos;
         ///        EXEC sp_executesql @SqlStatement
         ///    END

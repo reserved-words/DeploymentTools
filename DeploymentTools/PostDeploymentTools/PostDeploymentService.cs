@@ -43,9 +43,9 @@ namespace PostDeploymentTools
             }
         }
 
-        public void CreateTaskUser()
+        public void CreateTaskUser(string password)
         {
-            CreateUser(TaskUserName);
+            CreateSqlUser(TaskUserName, password);
         }
 
         public void CreateWebAppUser()
@@ -88,6 +88,21 @@ namespace PostDeploymentTools
             }
         }
 
+        private void CreateSqlUser(string userName, string password)
+        {
+            try
+            {
+                Database.CreateSqlUser(_connectionString, _databaseName, _schemaName, userName, password);
+            }
+            catch (Exception ex)
+            {
+                if (!HandleError(ex))
+                {
+                    throw;
+                }
+            }
+        }
+
         private void GrantPermission(string userName, string permission, string objectName = null)
         {
             try
@@ -113,7 +128,7 @@ namespace PostDeploymentTools
         private string ApiName => $"{_appName}Api";
         private string AppUserName => $@"IIS APPPOOL\{_appName}";
         private string ApiUserName => $@"IIS APPPOOL\{ApiName}";
-        private string TaskUserName => $@"{_domainName}\{_appName}User";
+        private string TaskUserName => $"{_appName}User";
 
         private bool HandleError(Exception ex)
         {
