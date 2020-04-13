@@ -3,7 +3,7 @@
 
     IF NOT EXISTS (SELECT [LoginName] FROM SYSLOGINS WHERE [Name] = @UserName)
     BEGIN
-        SET @SqlStatement = 'CREATE LOGIN [' + @UserName + '] WITH PASSWORD = ' + @Password + ', DEFAULT_DATABASE=[' + @DatabaseName + '], DEFAULT_LANGUAGE=[us_english]'
+        SET @SqlStatement = 'CREATE LOGIN [' + @UserName + '] WITH PASSWORD = ''' + @Password + ''', DEFAULT_DATABASE=[' + @DatabaseName + '], DEFAULT_LANGUAGE=[us_english]'
         EXEC sp_executesql @SqlStatement
     END
 
